@@ -27,14 +27,9 @@ export default {
   },
   components: {},
   async created() {
-    await this.$store.dispatch('getProducts');
-     this.products = this.$store.getters.products
-   // this.$router.push("/authentication");
   },
    computed: {
-    loading() {
-      return this.$store.getters.loading;
-    },
+
   },
 };
 </script>
