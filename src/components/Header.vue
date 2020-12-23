@@ -2,9 +2,11 @@
 <template>
   <div class="header">
     <img alt="Vue logo" src="../assets/logo.svg" />
-    <div>Sell</div>
-    <div>LogIn</div>
-    <img alt="heart" src="../assets/heart-outline.svg" />
+    <div class="header__buttons">
+      <div class="sell btn">Sell</div>
+      <div class="logIn">LogIn</div>
+      <img class="img" alt="heart" src="../assets/heart-outline.svg" />
+    </div>
   </div>
 </template>
 

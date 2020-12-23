@@ -1,3 +1,25 @@
 .header {
-  background: $brandColor1;
+  display: flex;
+  width: 1440px;
+  margin: auto;
+  padding-top: 18px;
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    text-transform: uppercase;
+    align-items: center;
+    font-size: 14px;
+    line-height: 31px;
+    text-align: center;
+
+    .sell {
+      width: 131px;
+    }
+    .logIn {
+      width: 131px;
+    }
+    .img {
+    }
+  }
 }
