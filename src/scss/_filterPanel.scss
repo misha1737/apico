@@ -1,0 +1,72 @@
+.filterPanel {
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.217111);
+  border-radius: 4px;
+  display: flex;
+  padding: 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  .select {
+    position: relative;
+    display: flex;
+    width: 285px;
+    margin-right: 23px;
+    background: #f9fafb;
+    border: 1px solid #dedee0;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #505050;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .chevron,
+    .grid {
+      transition: 0.2s;
+      margin: 9px;
+    }
+    .chevron {
+      transform: rotate(0deg);
+    }
+    .chevron.active {
+      transform: rotate(-180deg);
+    }
+    .selected {
+      width: 100%;
+    }
+  }
+  .list {
+    position: absolute;
+    background: #f9fafb;
+    width: 285px;
+    top: 33px;
+    left: -1px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #dedee0;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+
+    li {
+      list-style: none;
+      font-size: 14px;
+      line-height: 16px;
+      color: #505050;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+  }
+  input {
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px;
+    outline: none;
+    background: #f9fafb;
+    border: 1px solid #dedee0;
+    border-radius: 5px;
+  }
+  .line {
+    margin: 7px;
+    width: 12px;
+  }
+}

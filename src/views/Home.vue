@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
+  <div class="min-content">
     <div class="catalog">
+      <FilterPanel />
       <div v-for="product in products" :key="product.id">
         <img :src="product.imageUrl" alt="" />
         <h3>{{ product.title }}</h3>
@@ -12,7 +13,7 @@
 
 <script>
 // @ is an alias to /src
-
+import FilterPanel from "@/components/FilterPanel.vue";
 export default {
   name: "Home",
   data() {
@@ -20,7 +21,9 @@ export default {
       products: true,
     };
   },
-  components: {},
+  components: {
+    FilterPanel,
+  },
   async created() {
     await this.$store.dispatch("getProducts");
     this.products = this.$store.getters.products;
