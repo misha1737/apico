@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Authentication from "../views/Authentication.vue";
-
+import AddProduct from "../views/AddProduct.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -16,6 +16,12 @@ const routes = [
     name: "Authentication",
     component: Authentication,
   },
+  {
+    path: "/addProduct",
+    name: "AddProduct",
+    component: AddProduct,
+  },
+
 ];
 
 const router = new VueRouter({

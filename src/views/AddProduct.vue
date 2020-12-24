@@ -1,35 +1,85 @@
 <template>
-  <div class="home">
-    <div class="catalog">
-        <div v-for="product in products" :key="product.id">
-          
-          <img :src="product.imageUrl" alt="">
-          <h3>{{product.title}}</h3>
-          <p>{{product.price}}</p>
+  <div class="add">
+        <h2>Add product</h2>
+        <div>
+
+         <label for="title">Title</label>
+         <input v-model="title" id="title" type="text" placeholder="For example: Iron man suit" />
+
+         <label for="location">Location</label>
+         <input v-model="location" id="location" type="text" placeholder="For example: Los Angeles, CA" />
+
+         <label for="description">Description</label>
+         <input v-model="description" id="description" type="text" placeholder="description" />
+
+
+        <div>Photos
+          <div>
+            <img class="preview" :src="previewUrl" />
+          </div>
+          <input type="file" ref="inputFile" class="inputFile" @change="previewImage" accept="image/" />
+          <button class="button" @click="OpenFileSelect()">Upload picture</button>
         </div>
-      
-    </div>
 
+         <label for="price">Price</label>
+         <input v-model.number="price" id="price" type="text" placeholder="Price" />
 
+           <span>error:{{error}}</span>
+        <button class="btn" @click="submit()">SUBMIT</button>
 
+      </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import firestore from "firebase/app";
 export default {
   name: "Home",
   data() {
     return {
-      products: true,
+     title: '',
+     location: '',
+     description:'',
+     price:0,
+     inputFile: this.$refs.inputFile,
+    imageData:'',
+    previewUrl:null
     };
   },
-  components: {},
-  async created() {
+  methods: {
+      submit(){
+        const productObj = {
+            title: this.title,
+            description: this.description,
+            imageData: this.imageData,
+            price: this.price,
+            location: this.location,
+        };
+            this.$store.dispatch("saveProduct", productObj)  
+},
+    OpenFileSelect() {
+          this.inputFile.click();
+        },
+    previewImage(event) {
+      this.imageData = event.target.files[0];
+      this.previewUrl = URL.createObjectURL(this.imageData);
+      this.uploadImg();
+    },
+    uploadImg() {
+      
+    },
   },
-   computed: {
-
+  mounted() {
+    this.inputFile = this.$refs.inputFile;
   },
-};
+    computed:{
+        loading() {
+            return this.$store.getters.loading;
+            },
+        error() {
+            return this.$store.getters.error;
+            },
+        }
+  };
 </script>

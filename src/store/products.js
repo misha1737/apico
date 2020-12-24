@@ -16,7 +16,7 @@ export default {
         //     state.timeInLastPost = payload[payload.length - 1].time;
         //     state.posts.pop();
         // },
-        getProducts(state, payload) {
+        setProducts(state, payload) {
             state.products = payload;
         },
         // updateImg(state, payload) {
@@ -50,7 +50,7 @@ export default {
                 })
 
                 // postsArray = postsArray.sort((a, b) => a.time < b.time ? 1 : -1)
-                commit('getProducts',  productsArray)
+                commit('setProducts',  productsArray)
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
@@ -58,130 +58,55 @@ export default {
                 throw error
             }
         },
-
-        // async loadPosts({ commit, getters }) {
-        //     commit('clearError')
-        //     commit('setLoading', true)
-        //     try {
-        //         let post;
-        //         if (!getters.timeInLastPost)
-        //             post = await firebase.database().ref('posts').orderByChild('time').startAt(0).limitToLast(11).once('value')
-        //         else
-        //             post = await firebase.database().ref('posts').orderByChild('time').endAt(getters.timeInLastPost).limitToLast(11).once('value')
-
-        //         const posts = post.val();
-        //         let postsArray = [];
-
-        //         Object.keys(posts).forEach(key => {
-        //             const p = posts[key]
-        //             postsArray.push(
-        //                 new Post(
-        //                     p.postName,
-        //                     p.postContent,
-        //                     p.description,
-        //                     p.userId,
-        //                     key,
-        //                     p.url,
-        //                     p.category,
-        //                     p.publish,
-        //                     p.time
-        //                 )
-        //             )
-        //         })
-
-        //         postsArray = postsArray.sort((a, b) => a.time < b.time ? 1 : -1)
-        //         commit('loadPosts', postsArray)
-        //         commit('setLoading', false)
-        //     } catch (error) {
-        //         commit('setLoading', false)
-        //         commit('setError', error.message)
-        //         throw error
-        //     }
-        // },
-
-
-        // async savePost({ commit, getters }, payload) {
-        //     commit('clearError')
-        //     commit('setLoading', true)
-        //     try {
-        //         //logic
-
-        //         const newPost = new Post(
-        //             payload.postName,
-        //             payload.postContent,
-        //             payload.description,
-        //             getters.user.id,
-        //             null,
-        //             null,
-        //             payload.category,
-        //             payload.publish,
-        //             firebase.database.ServerValue.TIMESTAMP
-        //         );
-        //         const post = await firebase.database().ref('posts').push(newPost);
+        async saveProduct({ commit, dispatch }, payload) {
+            commit('clearError')
+            commit('setLoading', true)
+             
+            try {
+                const storageRef = firebase.storage().ref(`images/${Date.now()}/`).put(payload.imageData);
+                storageRef.on("state_changed",
+                    (snapshot) => {
+                    },
+                    (error) => {
+                        console.log(error.message);
+                    },
+                    () => {
+                        storageRef.snapshot.ref.getDownloadURL().then((urlImg) => {
+                           
+                            const newProduct = new Product(
+                                payload.title,
+                                payload.description,
+                                urlImg,
+                                payload.price,
+                                payload.location,
+                                null
+                                //firebase.database.ServerValue.TIMESTAMP
+                            );
+                            firebase.database().ref('products').push(newProduct);
+                            console.log('ok')
+                        });
+                    }
+                );
+              
                 
-        //         commit('savePost', newPost);
-        //         commit('setLoading', false);
-        //         return post.key;
-        //     } catch (error) {
-        //         commit('setLoading', false)
-        //         commit('setError', error.message)
-        //         throw error
-        //     }
-        // },
-
-
-        // async removeImage({ commit, getters }) {
-        //     try {
-        //         firebase.storage().ref("posts/").child(getters.selectedPost.id).listAll()
-        //         .then(function (result) {
-        //             result.items.forEach((item) => {
-        //                 firebase.storage().ref(item.location.path_).delete();
-        //             });
-        //         });
-        //         commit('updateImg', null);
-
-
-        //     }catch (error) {
+               // commit('savePost', newProduct);
+                commit('setLoading', false);
+               
+            } catch (error) {
+                commit('setLoading', false)
+                commit('setError', error.message)
+                throw error
+            }
+        },
+        async uploadImg({ commit, getters, dispatch }, payload) {
+            console.log('startUpload')
+            try {
                 
-        //         commit('setError', error.message)
-        //         throw error
-        //     }
-        // },
+            } catch (error) {
+                throw error
+            }
 
-
-        // async uploadImg({ commit, getters, dispatch }, payload) {
-        //     commit('clearError')
-        //     commit('setLoading', true)
-        //     try {
-        //         dispatch('removeImage');
-        //         const storageRef = firebase.storage().ref(`posts/${getters.selectedPost.id}/${payload.name}`).put(payload);
-        //         storageRef.on("state_changed",
-        //             (snapshot) => {
-        //                 let uploadValue=0;
-        //                 uploadValue=((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        //                 commit('uploadImgValue', uploadValue);
-        //             },
-        //             (error) => {
-        //                 console.log(error.message);
-        //             },
-        //             () => {
-        //                 storageRef.snapshot.ref.getDownloadURL().then((urlImg) => {
-        //                     commit('updateImg', urlImg);
-        //                     firebase.database().ref('posts/' + getters.selectedPost.id).update(
-        //                         {url:urlImg}
-        //                     );
-        //                     commit('uploadImgValue', null);
-        //                 });
-        //             }
-        //         );
-        //         commit('setLoading', false)
-        //     } catch (error) {
-        //         commit('setLoading', false)
-        //         commit('setError', error.message)
-        //         throw error
-        //     }
-
-        // },
+         },
         // async removePost({ commit,dispatch, getters }, payload) {
         //     commit('clearError')
         //     commit('setLoading', true)
