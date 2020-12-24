@@ -5,6 +5,7 @@ export default {
     loading: false,
     error: null,
     search: false,
+    avatar: false,
   },
   mutations: {
     setLoading(state, payload) {
@@ -18,6 +19,9 @@ export default {
     },
     searchOpen(state, payload) {
       state.search = payload;
+    },
+    avatar(state, payload) {
+      state.avatar = payload;
     },
   },
   actions: {
@@ -40,6 +44,9 @@ export default {
     },
     search(state) {
       return state.search;
+    },
+    avatar(state) {
+      return state.avatar;
     },
   },
 };

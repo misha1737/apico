@@ -8,8 +8,18 @@
       </router-link>
       <div class="header__buttons">
         <router-link class="sell btn" to="/">Sell</router-link>
-        <router-link class="logIn" to="/authentication">LogIn</router-link>
-        <router-link class="logIn" to="/addProduct">add</router-link>
+        <router-link v-if="user" class="logIn" to="/addProduct"
+          >add</router-link
+        >
+        <router-link v-if="user" class="logIn" to="/authentication"
+          >LogOut</router-link
+        >
+        <router-link v-else class="logIn" to="/authentication"
+          >LogIn</router-link
+        >
+        <img v-if="avatar" class="avatar" src="../assets/avatar.svg" alt="" />
+        <img v-if="user" src="../assets/heart-light.svg" alt="" />
+        <img v-else src="../assets/heart-outline.svg" alt="" />
       </div>
     </div>
     <div class="min-content">
@@ -25,7 +35,6 @@
         <div class="searchButton">Search</div>
       </div>
     </div>
-    {{ search }}
   </div>
 </template>
 <script>
@@ -37,6 +46,9 @@ export default {
   computed: {
     search() {
       return this.$store.getters.search;
+    },
+    avatar() {
+      return this.$store.getters.avatar;
     },
   },
 };

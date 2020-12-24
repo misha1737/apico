@@ -1,7 +1,48 @@
 .form.big-form {
-  width: 1440px;
+  width: 1400px;
+  margin-top: 34px;
   .formContent {
     width: 664px;
     margin: auto;
+    .submit {
+      border-radius: 5px;
+      width: 377px;
+      margin: auto;
+      text-align: center;
+      font-size: 16px;
+      line-height: 18px;
+      padding: 20px;
+      margin-top: 32px;
+    }
+  }
+  .addPicture {
+    width: 100%;
+    height: 124px;
+    background: #f9fafb;
+    border: 1px solid #dedee0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    .iconBox {
+      width: 92px;
+      height: 92px;
+      background: #e4e4e4;
+      border-radius: 4px;
+      margin-left: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .preview {
+      width: 92px;
+      height: 92px;
+      margin-left: 16px;
+      border-radius: 4px;
+    }
   }
 }

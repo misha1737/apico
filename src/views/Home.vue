@@ -24,7 +24,6 @@ export default {
   async created() {
     await this.$store.dispatch("getProducts");
     this.products = this.$store.getters.products;
-    // this.$router.push("/authentication");
     this.$store.commit("searchOpen", true);
   },
   beforeDestroy() {

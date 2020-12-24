@@ -29,20 +29,22 @@
           />
 
           <div>
-            Photos
-            <div>
-              <img class="preview" :src="previewUrl" />
-            </div>
+            <label for="photo">Photo</label>
             <input
+              v-show="false"
+              id="photo"
               type="file"
               ref="inputFile"
               class="inputFile"
               @change="previewImage"
               accept="image/"
             />
-            <button class="button" @click="OpenFileSelect()">
-              Upload picture
-            </button>
+            <div class="addPicture">
+              <img v-if="previewUrl" class="preview" :src="previewUrl" />
+              <div class="iconBox" @click="OpenFileSelect()">
+                <img src="../assets/plus.svg" />
+              </div>
+            </div>
           </div>
 
           <label for="price">Price</label>
@@ -53,8 +55,8 @@
             placeholder="Price"
           />
 
-          <span>error:{{ error }}</span>
-          <button class="btn" @click="submit()">SUBMIT</button>
+          <span>{{ error }}</span>
+          <div class="btn submit" @click="submit()">SUBMIT</div>
         </div>
       </div>
     </div>
@@ -108,6 +110,12 @@ export default {
     error() {
       return this.$store.getters.error;
     },
+  },
+  created() {
+    this.$store.commit("avatar", true);
+  },
+  beforeDestroy() {
+    this.$store.commit("avatar", false);
   },
 };
 </script>

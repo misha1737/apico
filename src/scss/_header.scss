@@ -5,6 +5,7 @@
     flex-direction: row;
     margin: auto;
     padding-top: 18px;
+    padding-bottom: 18px;
   }
   &__buttons {
     display: flex;
@@ -26,6 +27,9 @@
     .logIn {
       width: 131px;
     }
+    .avatar {
+      margin-right: 36px;
+    }
   }
   &.dark {
     background: $gradient;
@@ -36,7 +40,7 @@
     .search {
       display: flex;
       width: 100%;
-      margin-top: 44px;
+      margin-top: 36px;
       padding-bottom: 14px;
       .byName {
         width: 54%;
