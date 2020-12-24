@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div>
+  <div class="content">
+    <div class="form">
       <h3>Register</h3>
       <label for="email">Email</label>
       <input
@@ -12,16 +12,22 @@
       <label for="name">Full name</label>
       <input v-model="name" id="name" type="text" placeholder="Tony Stark" />
       <label for="password">Password</label>
-      <input v-model="password" id="password" type="password" />
-      <span> <img alt="eye" src="../assets/eye.svg" /></span>
+      <div class="password">
+        <input v-model="password" id="password" type="password" />
+        <span> <img class="eye" alt="eye" src="../assets/eye.svg" /></span>
+      </div>
       <label for="confirmPassword">confirm password</label>
-      <input v-model="confirmPassword" id="confirmPassword" type="password" />
-      <span> <img alt="eye" src="../assets/eye.svg" /></span>
-      <div>Continue</div>
+      <div class="password">
+        <input v-model="confirmPassword" id="confirmPassword" type="password" />
+
+        <span> <img class="eye" alt="eye" src="../assets/eye.svg" /></span>
+      </div>
+      <div class="btn buton">Continue</div>
     </div>
-    <div>
+    <div class="blockAuth">
       <p>
-        I already have an account, <span @click="$emit('auth')">LOG IN</span>
+        I already have an account,
+        <span class="link" @click="$emit('auth')">LOG IN</span>
       </p>
     </div>
   </div>

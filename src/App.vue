@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header :user="user" />
     <router-view />
   </div>
 </template>
@@ -9,6 +9,11 @@ import Header from "./components/Header.vue";
 export default {
   components: {
     Header,
+  },
+  data() {
+    return {
+      user: true,
+    };
   },
 };
 </script>

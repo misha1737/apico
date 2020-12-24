@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <Authorization v-if="authoization" @register="changeAuthBlock(false)" />
     <Registration v-else @auth="changeAuthBlock(true)" />
   </div>
@@ -26,5 +26,5 @@ export default {
 };
 </script>  
 <style lang="scss">
-//@import "./../scss/views/_sitebar.scss";
+@import "./../scss/_authentication.scss";
 </style>;

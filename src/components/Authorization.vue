@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div>
+    <div class="form">
       <h3>Login</h3>
       <label for="email">Email</label>
       <input
@@ -10,19 +10,22 @@
         placeholder="Example@gmail.com"
       />
       <label for="password">Password</label>
-      <input
-        v-model="password"
-        id="password"
-        type="password"
-        placeholder="Enter password"
-      />
-      <span> <img alt="eye" src="../assets/eye.svg" /></span>
-      <span>Don’t remember password?</span>
-      <div>Continue</div>
+      <div class="password">
+        <input
+          v-model="password"
+          id="password"
+          type="password"
+          placeholder="Enter password"
+        />
+        <span> <img alt="eye" class="eye" src="../assets/eye.svg" /></span>
+      </div>
+      <p class="forgotPassword">Don’t remember password?</p>
+      <div class="btn buton">Continue</div>
     </div>
-    <div>
+    <div class="blockAuth">
       <p>
-        I have no account, <span @click="$emit('register')">REGISTER NOW</span>
+        I have no account,
+        <span class="link" @click="$emit('register')">REGISTER NOW</span>
       </p>
     </div>
   </div>

@@ -1,3 +1,13 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-family: $Helvetica;
+}
 body {
   margin: 0;
   font-family: $Helvetica;
@@ -10,6 +20,11 @@ body {
 }
 .content {
   width: 1440px;
+  margin: auto;
+  color: #8c8c8c;
+}
+.min-content {
+  width: 1095px;
   margin: auto;
 }
 //1136

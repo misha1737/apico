@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <div class="catalog">
-        <div v-for="product in products" :key="product.id">
-          <img :src="product.imageUrl" alt="">
-          <h3>{{product.title}}</h3>
-          <p>{{product.price}}</p>
-        </div> 
+      <div v-for="product in products" :key="product.id">
+        <img :src="product.imageUrl" alt="" />
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -22,11 +22,15 @@ export default {
   },
   components: {},
   async created() {
-    await this.$store.dispatch('getProducts');
-     this.products = this.$store.getters.products
-   // this.$router.push("/authentication");
+    await this.$store.dispatch("getProducts");
+    this.products = this.$store.getters.products;
+    // this.$router.push("/authentication");
+    this.$store.commit("searchOpen", true);
   },
-   computed: {
+  beforeDestroy() {
+    this.$store.commit("searchOpen", false);
+  },
+  computed: {
     loading() {
       return this.$store.getters.loading;
     },
