@@ -11,9 +11,9 @@
         <router-link v-if="user" class="logIn" to="/addProduct"
           >add</router-link
         >
-        <router-link v-if="user" class="logIn" to="/authentication"
-          >LogOut</router-link
-        >
+        <div v-if="user" @click="logout()" class="logIn" 
+          >LogOut</div>
+        
         <router-link v-else class="logIn" to="/authentication"
           >LogIn</router-link
         >
@@ -42,6 +42,12 @@ export default {
   name: "Header",
   props: {
     user: Boolean,
+  },
+  methods:{
+    logout() {
+      this.$store.dispatch("logoutUser");
+      this.$router.push("/authentication");
+    },
   },
   computed: {
     search() {

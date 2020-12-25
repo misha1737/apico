@@ -27,13 +27,11 @@ new Vue({
     };
 
      firestore.initializeApp(firebaseConfig);
-    // firestore.auth().onAuthStateChanged(user=>{
-    //   if (user){
-    //     this.$store.dispatch('loggedUser',user);
-    //   }
-    //   this.$store.dispatch('getPosts');
-    //   this.$store.dispatch('loadCategories');
-    // })
+     firestore.auth().onAuthStateChanged(user=>{
+      if (user){
+        this.$store.dispatch('loggedUser',user);
+      }
+    })
   }
 }).$mount('#app')
 

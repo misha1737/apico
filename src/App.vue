@@ -10,11 +10,11 @@ export default {
   components: {
     Header,
   },
-  data() {
-    return {
-      user: true,
-    };
-  },
+  computed:{
+    user(){
+      return this.$store.getters.checkUser; 
+    }
+  }
 };
 </script>
 <style lang="scss">
