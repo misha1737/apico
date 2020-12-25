@@ -50,12 +50,10 @@ export default {
               key
             )
           );
-
+          productsArray.reverse();
           if ((p && minPrice > p.price) || minPrice == -1) minPrice = p.price;
           if (p && maxPrice < p.price) maxPrice = p.price;
         });
-
-        // postsArray = postsArray.sort((a, b) => a.time < b.time ? 1 : -1)
         commit("setPricesForFilter", { min: minPrice, max: maxPrice });
         commit("setProducts", productsArray);
         commit("setLoading", false);
@@ -74,39 +72,48 @@ export default {
         return;
       }
       try {
-        const storageRef = firebase
-          .storage()
-          .ref(`images/${Date.now()}/`)
-          .put(payload.imageData);
-        storageRef.on(
-          "state_changed",
-          (snapshot) => {},
-          (error) => {
-            console.log(error.message);
-          },
-          () => {
-            storageRef.snapshot.ref
-              .getDownloadURL()
-              .then((urlImg) => {
-                const newProduct = new Product(
-                  payload.title,
-                  payload.description,
-                  urlImg,
-                  price,
-                  payload.location,
-                  null
-                  //firebase.database.ServerValue.TIMESTAMP
-                );
-                firebase
-                  .database()
-                  .ref("products")
-                  .push(newProduct);
-              })
-              .then(() => {
-                commit("setLoading", false);
-              });
-          }
+        const newProduct = new Product(
+          payload.title,
+          payload.description,
+          null,
+          price,
+          payload.location,
+          null
+          //firebase.database.ServerValue.TIMESTAMP
         );
+        if (payload.imageData) {
+          const storageRef = firebase
+            .storage()
+            .ref(`images/${Date.now()}/`)
+            .put(payload.imageData);
+          storageRef.on(
+            "state_changed",
+            (snapshot) => {},
+            (error) => {
+              console.log(error.message);
+            },
+            () => {
+              storageRef.snapshot.ref
+                .getDownloadURL()
+                .then((urlImg) => {
+                  newProduct.imageUrl = urlImg;
+                  firebase
+                    .database()
+                    .ref("products")
+                    .push(newProduct);
+                })
+                .then(() => {
+                  commit("setLoading", false);
+                });
+            }
+          );
+        } else {
+          await firebase
+            .database()
+            .ref("products")
+            .push(newProduct);
+          commit("setLoading", false);
+        }
       } catch (error) {
         commit("setLoading", false);
         commit("setError", error.message);

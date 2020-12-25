@@ -4,19 +4,21 @@
       <div class="formContent">
         <h3>Add product</h3>
         <div>
-          <label for="title">Title</label>
+          <label for="title" class="important">Title</label>
           <input
             v-model="title"
             id="title"
             type="text"
+            @change="userError = null"
             placeholder="For example: Iron man suit"
           />
 
-          <label for="location">Location</label>
+          <label for="location" class="important">Location</label>
           <input
             v-model="location"
             id="location"
             type="text"
+            @change="userError = null"
             placeholder="For example: Los Angeles, CA"
           />
 
@@ -55,6 +57,7 @@
             placeholder="Price"
           />
           <p class="error">{{ error }}</p>
+          <p v-if="userError" class="error">{{ userError }}</p>
           <div class="btn submit" v-if="!loading" @click="submit()">SUBMIT</div>
           <div class="btn submit disabled" v-else>Loading...</div>
         </div>
@@ -77,10 +80,15 @@ export default {
       inputFile: this.$refs.inputFile,
       imageData: "",
       previewUrl: null,
+      userError: null,
     };
   },
   methods: {
     submit() {
+      if (this.title.length < 1 && this.location.length < 1) {
+        this.userError = "please fill out all required fields";
+        return;
+      }
       const productObj = {
         title: this.title,
         description: this.description,

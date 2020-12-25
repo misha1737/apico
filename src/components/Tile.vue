@@ -10,7 +10,7 @@
       />
       <img src="../assets/mask.jpg" alt="product" />
     </div>
-    <div class="like" @click="select(product.id)">
+    <div v-if="user" class="like" @click="select(product.id)">
       <img v-if="isLiked" src="../assets/like_active.svg" alt="icon" />
       <img v-else src="../assets/like.svg" alt="icon" />
     </div>
@@ -51,6 +51,9 @@ export default {
           : false;
       }
       return false;
+    },
+    user() {
+      return this.$store.getters.checkUser;
     },
   },
 };
