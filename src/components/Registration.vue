@@ -10,20 +10,43 @@
         placeholder="Example@gmail.com"
       />
       <label for="name">Full name</label>
-      <input v-model="name" id="name" type="text" @change='userError=null' placeholder="Tony Stark" />
+      <input
+        v-model="name"
+        id="name"
+        type="text"
+        @change="userError = null"
+        placeholder="Tony Stark"
+      />
       <label for="password">Password</label>
       <div class="password">
-        <input v-model="password" id="password" @change='userError=null' :type="passwordView ? 'text': 'password'"  />
-        <span> <img @click="passwordView=!passwordView" class="eye" alt="eye" src="../assets/eye.svg" /></span>
+        <input
+          v-model="password"
+          id="password"
+          @change="userError = null"
+          :type="passwordView ? 'text' : 'password'"
+        />
+        <span>
+          <img
+            @click="passwordView = !passwordView"
+            class="eye"
+            alt="eye"
+            src="../assets/eye.svg"
+        /></span>
       </div>
       <label for="confirmPassword">confirm password</label>
       <div class="password">
-        <input v-model="confirmPassword" id="confirmPassword" :type="cPasswordView ? 'text': 'password'" />
+        <input
+          v-model="confirmPassword"
+          id="confirmPassword"
+          :type="cPasswordView ? 'text' : 'password'"
+        />
 
-        <span @click="cPasswordView=!cPasswordView"> <img class="eye" alt="eye" src="../assets/eye.svg" /></span>
+        <span @click="cPasswordView = !cPasswordView">
+          <img class="eye" alt="eye" src="../assets/eye.svg"
+        /></span>
       </div>
-      <p v-if="userError" class="error">{{userError}}</p>
-      <p v-if="error" class="error">{{error}}</p>
+      <p v-if="userError" class="error">{{ userError }}</p>
+      <p v-if="error" class="error">{{ error }}</p>
       <div class="btn buton" @click="register()">Continue</div>
     </div>
     <div class="blockAuth">
@@ -44,25 +67,27 @@ export default {
       password: "",
       name: "",
       confirmPassword: "",
-      cPasswordView:false,
-      passwordView:false
+      cPasswordView: false,
+      passwordView: false,
     };
   },
   methods: {
-    register(){
-      if(this.password!=this.confirmPassword){
-        this.userError="password and confirm password not matched"
-        return
+    register() {
+      if (this.password != this.confirmPassword) {
+        this.userError = "password and confirm password not matched";
+        return;
       }
-        const userObj={
-          email:this.email,
-           password:this.password, 
-           userName:this.name
-        }
-       this.$store.dispatch("registerUser", userObj);
-    }
+      const userObj = {
+        email: this.email,
+        password: this.password,
+        userName: this.name,
+      };
+      this.$store.dispatch("registerUser", userObj).then(() => {
+        this.$router.push("/");
+      });
+    },
   },
-   computed: {
+  computed: {
     loading() {
       return this.$store.getters.loading;
     },
