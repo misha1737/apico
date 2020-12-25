@@ -20,9 +20,9 @@
         </li>
       </ul>
     </div>
-    <input type="text" placeholder="Search products by name" />
+    <input v-model.number='minPrice' type="text" placeholder="Price from (USD)" />
     <img class="line" src="../assets/line.svg" alt="" />
-    <input type="text" placeholder="Search products by name" />
+    <input v-model.number='maxPrice' type="text" placeholder="Price to (USD)" />
   </div>
 </template>
 <script>
@@ -47,7 +47,24 @@ export default {
     },
   },
   props: {},
-  computed: {},
+  computed: {
+    minPrice:{
+      get(){
+        return this.$store.getters.minPrice; 
+      },
+      set(v){
+        this.$store.commit("setMinPrice", v);
+      }
+    },
+    maxPrice:{
+      get(){
+        return this.$store.getters.maxPrice; 
+      },
+      set(v){
+        this.$store.commit("setMaxPrice", v);
+      }
+    }
+  },
 };
 </script>  
 <style lang="scss">

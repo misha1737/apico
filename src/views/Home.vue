@@ -13,18 +13,13 @@ import FilterPanel from "@/components/FilterPanel.vue";
 import Tile from "@/components/Tile.vue";
 export default {
   name: "Home",
-  data() {
-    return {
-      products: true,
-    };
-  },
+
   components: {
     FilterPanel,
     Tile,
   },
   async created() {
     await this.$store.dispatch("getProducts");
-    this.products = this.$store.getters.products;
     this.$store.commit("searchOpen", true);
   },
   beforeDestroy() {
@@ -34,6 +29,20 @@ export default {
     loading() {
       return this.$store.getters.loading;
     },
+    minPrice(){
+        return this.$store.getters.minPrice; 
+    },
+    maxPrice(){
+        return this.$store.getters.maxPrice; 
+    },
+    products(){
+      const products = this.$store.getters.products;
+     return products.filter(item=>{
+        return (this.minPrice<=item.price && item.price<=this.maxPrice )
+      })
+     
+  
+    }
   },
 };
 </script>
