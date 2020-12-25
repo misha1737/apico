@@ -54,9 +54,9 @@
             type="text"
             placeholder="Price"
           />
-
-          <span>{{ error }}</span>
-          <div class="btn submit" @click="submit()">SUBMIT</div>
+          <p class="error">{{ error }}</p>
+          <div class="btn submit" v-if="!loading" @click="submit()">SUBMIT</div>
+          <div class="btn submit disabled" v-else>Loading...</div>
         </div>
       </div>
     </div>
@@ -96,9 +96,7 @@ export default {
     previewImage(event) {
       this.imageData = event.target.files[0];
       this.previewUrl = URL.createObjectURL(this.imageData);
-      this.uploadImg();
     },
-    uploadImg() {},
   },
   mounted() {
     this.inputFile = this.$refs.inputFile;

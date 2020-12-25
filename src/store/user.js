@@ -50,6 +50,7 @@ export default {
         ).val();
         commit("setUser", new User(user.user.uid, userInfo.name));
         dispatch("getLikes");
+        commit("setLoading", false);
       } catch (error) {
         commit("setLoading", false);
         commit("setError", error.message);
@@ -72,6 +73,7 @@ export default {
           }
           dispatch("getLikes");
         }
+        commit("setLoading", false);
       } catch (error) {
         commit("setLoading", false);
         commit("setError", error.message);
@@ -92,6 +94,7 @@ export default {
           .ref(`likes/${state.user.id}/`)
           .push(payload);
         dispatch("getLikes");
+        commit("setLoading", false);
       } catch (error) {
         commit("setLoading", false);
         commit("setError", error.message);
@@ -115,6 +118,7 @@ export default {
           .child(id)
           .remove();
         dispatch("getLikes");
+        commit("setLoading", false);
       } catch (error) {
         commit("setLoading", false);
         commit("setError", error.message);
@@ -132,6 +136,7 @@ export default {
           .once("value");
         likes = likes.val();
         commit("setLikes", likes);
+        commit("setLoading", false);
       } catch (error) {
         commit("setLoading", false);
         commit("setError", error.message);

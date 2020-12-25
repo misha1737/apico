@@ -47,7 +47,8 @@
       </div>
       <p v-if="userError" class="error">{{ userError }}</p>
       <p v-if="error" class="error">{{ error }}</p>
-      <div class="btn buton" @click="register()">Continue</div>
+      <div class="btn buton" v-if="!loading" @click="register()">Continue</div>
+      <div v-else class="btn buton disabled">Loading...</div>
     </div>
     <div class="blockAuth">
       <p>

@@ -23,26 +23,30 @@ export default {
     this.$store.commit("searchOpen", true);
   },
   beforeDestroy() {
+    this.$store.commit("setSearchText", "");
     this.$store.commit("searchOpen", false);
   },
   computed: {
     loading() {
       return this.$store.getters.loading;
     },
-    minPrice(){
-        return this.$store.getters.minPrice; 
+    minPrice() {
+      return this.$store.getters.minPrice;
     },
-    maxPrice(){
-        return this.$store.getters.maxPrice; 
+    maxPrice() {
+      return this.$store.getters.maxPrice;
     },
-    products(){
+    searchText() {
+      return this.$store.getters.searchText;
+    },
+    products() {
       const products = this.$store.getters.products;
-     return products.filter(item=>{
-        return (this.minPrice<=item.price && item.price<=this.maxPrice )
-      })
-     
-  
-    }
+      return products.filter((item) => {
+        if (item.title.toUpperCase().indexOf(this.searchText.toUpperCase()))
+          return false;
+        return this.minPrice <= item.price && item.price <= this.maxPrice;
+      });
+    },
   },
 };
 </script>

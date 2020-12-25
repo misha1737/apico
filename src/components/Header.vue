@@ -28,13 +28,17 @@
       <div v-if="user && search" class="search">
         <div class="byName">
           <img class="icon" alt="" src="../assets/search.svg" />
-          <input type="text" placeholder="Search products by name" />
+          <input
+            v-model="searchText"
+            type="text"
+            placeholder="Search products by name"
+          />
         </div>
         <div class="byLocation">
           <img class="icon" alt="" src="../assets/location.svg" />
           <input type="text" placeholder="Location" />
         </div>
-        <div class="searchButton">Search</div>
+        <div class="searchButton" @click="startSearch">Search</div>
       </div>
     </div>
   </div>
@@ -45,6 +49,7 @@ export default {
   data() {
     return {
       openMenu: false,
+      searchText: "",
     };
   },
   props: {
@@ -54,6 +59,9 @@ export default {
     logout() {
       this.$store.dispatch("logoutUser");
       this.$router.push("/authentication");
+    },
+    startSearch() {
+      this.$store.commit("setSearchText", this.searchText);
     },
   },
   computed: {

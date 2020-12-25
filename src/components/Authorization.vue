@@ -14,14 +14,17 @@
         <input
           v-model="password"
           id="password"
-          :type="passwordView ? 'text': 'password' "
+          :type="passwordView ? 'text' : 'password'"
           placeholder="Enter password"
         />
-        <span @click="passwordView=!passwordView">  <img alt="eye" class="eye" src="../assets/eye.svg" /></span>
+        <span @click="passwordView = !passwordView">
+          <img alt="eye" class="eye" src="../assets/eye.svg"
+        /></span>
       </div>
       <p class="forgotPassword">Don’t remember password?</p>
-      <p v-if="error" class="error">{{error}}</p>
-      <div @click="login()" class="btn buton">Continue</div>
+      <p v-if="error" class="error">{{ error }}</p>
+      <div @click="login()" v-if="!loading" class="btn buton">Continue</div>
+      <div v-else class="btn buton disabled">Loading...</div>
     </div>
     <div class="blockAuth">
       <p>
@@ -38,21 +41,21 @@ export default {
     return {
       email: "",
       password: "",
-      passwordView: false
+      passwordView: false,
     };
   },
   methods: {
-    login(){
-        const userObj={
-          email:this.email,
-           password:this.password, 
-        }
-       this.$store.dispatch("loginUser", userObj).then(() => {
-          this.$router.push("/");
-        });
-    }
+    login() {
+      const userObj = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$store.dispatch("loginUser", userObj).then(() => {
+        this.$router.push("/");
+      });
+    },
   },
-   computed: {
+  computed: {
     loading() {
       return this.$store.getters.loading;
     },
