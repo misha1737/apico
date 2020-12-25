@@ -46,3 +46,30 @@
     }
   }
 }
+@media (max-width: 1550px) {
+  .form.big-form {
+    width: 1095px;
+    .formContent {
+      width: 695px;
+    }
+  }
+}
+@media (max-width: 1195px) {
+  .form.big-form {
+    width: 695px;
+    .formContent {
+      width: 320px;
+      .submit {
+        width: calc(100% - 40px);
+      }
+    }
+  }
+}
+@media (max-width: 745px) {
+  .form.big-form {
+    width: 250px;
+    .formContent {
+      width: 230px;
+    }
+  }
+}

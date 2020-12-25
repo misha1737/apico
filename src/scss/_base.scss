@@ -30,7 +30,41 @@ body {
 input {
   background: #f9fafb;
 }
-p.error{
-color:red
+p.error {
+  color: red;
 }
 //1136
+
+@media (max-width: 1550px) {
+  .content {
+    width: 1095px;
+    margin: auto;
+    color: #8c8c8c;
+  }
+  .min-content {
+    width: 695px;
+    margin: auto;
+  }
+}
+@media (max-width: 1195px) {
+  .content {
+    width: 695px;
+    margin: auto;
+    color: #8c8c8c;
+  }
+  .min-content {
+    width: 600px;
+    margin: auto;
+  }
+}
+@media (max-width: 745px) {
+  .content {
+    width: 300px;
+    margin: auto;
+    color: #8c8c8c;
+  }
+  .min-content {
+    width: 300px;
+    margin: auto;
+  }
+}

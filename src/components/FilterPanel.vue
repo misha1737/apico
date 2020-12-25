@@ -20,9 +20,19 @@
         </li>
       </ul>
     </div>
-    <input v-model.number='minPrice' type="text" placeholder="Price from (USD)" />
-    <img class="line" src="../assets/line.svg" alt="" />
-    <input v-model.number='maxPrice' type="text" placeholder="Price to (USD)" />
+    <div class="priceFilter">
+      <input
+        v-model.number="minPrice"
+        type="text"
+        placeholder="Price from (USD)"
+      />
+      <img class="line" src="../assets/line.svg" alt="" />
+      <input
+        v-model.number="maxPrice"
+        type="text"
+        placeholder="Price to (USD)"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -48,22 +58,22 @@ export default {
   },
   props: {},
   computed: {
-    minPrice:{
-      get(){
-        return this.$store.getters.minPrice; 
+    minPrice: {
+      get() {
+        return this.$store.getters.minPrice;
       },
-      set(v){
+      set(v) {
         this.$store.commit("setMinPrice", v);
-      }
-    },
-    maxPrice:{
-      get(){
-        return this.$store.getters.maxPrice; 
       },
-      set(v){
+    },
+    maxPrice: {
+      get() {
+        return this.$store.getters.maxPrice;
+      },
+      set(v) {
         this.$store.commit("setMaxPrice", v);
-      }
-    }
+      },
+    },
   },
 };
 </script>  

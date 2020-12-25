@@ -59,3 +59,32 @@
     }
   }
 }
+
+@media (max-width: 1550px) {
+  .catalog {
+    .tile {
+      max-width: calc(33.3% - 6px);
+      min-width: calc(33.3% - 6px);
+      margin: 3px;
+    }
+  }
+}
+@media (max-width: 1195px) {
+  .catalog {
+    .tile {
+      border-radius: 4px;
+      max-width: calc(50% - 6px);
+      min-width: calc(50% - 6px);
+      margin: 3px;
+    }
+  }
+}
+@media (max-width: 745px) {
+  .catalog {
+    .tile {
+      border-radius: 4px;
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+}

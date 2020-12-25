@@ -82,3 +82,18 @@
     }
   }
 }
+
+@media (max-width: 1550px) {
+}
+@media (max-width: 1195px) {
+}
+@media (max-width: 745px) {
+  .content {
+    .form {
+      width: 240px;
+    }
+    .blockAuth {
+      width: 240px;
+    }
+  }
+}

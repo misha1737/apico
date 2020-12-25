@@ -33,6 +33,8 @@
     }
     .selected {
       width: 100%;
+      height: 16px;
+      overflow: hidden;
     }
   }
   .list {
@@ -69,5 +71,37 @@
   .line {
     margin: 7px;
     width: 12px;
+  }
+  .priceFilter {
+    margin-top: 0px;
+    input {
+      width: 40%;
+    }
+  }
+}
+
+@media (max-width: 1550px) {
+  .filterPanel .list {
+    width: 254px;
+  }
+}
+@media (max-width: 1195px) {
+  .filterPanel .list {
+    width: 158px;
+  }
+}
+@media (max-width: 745px) {
+  .filterPanel {
+    flex-direction: column;
+    .select {
+      margin: 0;
+      width: 272px;
+    }
+    .priceFilter {
+      margin-top: 10px;
+      input {
+        width: 106px;
+      }
+    }
   }
 }

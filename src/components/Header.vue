@@ -6,20 +6,22 @@
         <img v-if="user" alt="logo" src="../assets/logo-light.svg" />
         <img v-else alt="logo" src="../assets/logo.svg" />
       </router-link>
-      <div class="header__buttons">
+      <div class="header__buttons" :class="{ active: openMenu }">
         <router-link class="sell btn" to="/">Sell</router-link>
         <router-link v-if="user" class="logIn" to="/addProduct"
           >add</router-link
         >
-        <div v-if="user" @click="logout()" class="logIn" 
-          >LogOut</div>
-        
+        <div v-if="user" @click="logout()" class="logIn">LogOut</div>
+
         <router-link v-else class="logIn" to="/authentication"
           >LogIn</router-link
         >
         <img v-if="avatar" class="avatar" src="../assets/avatar.svg" alt="" />
         <img v-if="user" src="../assets/heart-light.svg" alt="" />
         <img v-else src="../assets/heart-outline.svg" alt="" />
+      </div>
+      <div class="hamburger" @click="openMenu = !openMenu">
+        <img src="../assets/menu.svg" alt="" />
       </div>
     </div>
     <div class="min-content">
@@ -40,10 +42,15 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      openMenu: false,
+    };
+  },
   props: {
     user: Boolean,
   },
-  methods:{
+  methods: {
     logout() {
       this.$store.dispatch("logoutUser");
       this.$router.push("/authentication");
@@ -55,6 +62,11 @@ export default {
     },
     avatar() {
       return this.$store.getters.avatar;
+    },
+  },
+  watch: {
+    $route(to, from) {
+      this.openMenu = false;
     },
   },
 };
